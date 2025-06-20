@@ -3,7 +3,7 @@ body, html {
     margin: 0;
     padding: 0;
     overflow: hidden; /* Prevent scrollbars for game feel */
-    font-family: 'Press Start 2P', cursive; /* Example pixel font */
+    font-family: 'Audiowide', sans-serif; /* Applied Audiowide here */
     cursor: url('assets/pixel_cursor.png'), auto; /* Custom pixel cursor */
 }
 
@@ -51,7 +51,6 @@ img {
 }
 
 .background-skull-glow {
-    /* If the glowing skull is a separate layer */
     position: absolute;
     bottom: 15%; /* Adjust to align with your structure */
     right: 18%;
@@ -63,7 +62,6 @@ img {
     animation: pulseGlow 2s infinite alternate;
 }
 
-
 /* Foreground Silhouettes */
 #foreground-silhouette {
     position: absolute;
@@ -71,22 +69,21 @@ img {
     left: 0;
     width: 100%;
     height: auto;
-    display: flex; /* To easily place multiple silhouette elements */
+    display: flex;
     align-items: flex-end;
-    justify-content: space-between; /* If elements are on left and right */
-    pointer-events: none; /* Make sure it doesn't block clicks on menu */
+    justify-content: space-between;
+    pointer-events: none;
 }
 
 .player-silhouette {
     width: 30%; /* Adjust size */
     height: auto;
-    /* Use a dark, solid color or specific image for silhouette */
-    filter: brightness(0) invert(1); /* Turns image black if it's white, or adjust based on your asset */
-    background-image: url('assets/octopus_hero_silhouette.png'); /* Your character's silhouette */
+    filter: brightness(0) invert(1);
+    background-image: url('assets/hero_silhouette.png'); /* Your character's silhouette */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom left;
-    margin-left: 5%; /* Example spacing */
+    margin-left: 5%;
 }
 
 .ground-silhouette {
@@ -96,57 +93,55 @@ img {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom center;
-    position: absolute; /* Position relative to #foreground-silhouette */
+    position: absolute;
     bottom: 0;
     left: 0;
-    /* You might use a dark color for the ground too */
     background-color: #000;
 }
 
-
 /* Title Screen */
 #title-screen {
-    position: relative; /* To layer elements within it */
-    z-index: 10; /* Ensure it's on top of backgrounds */
+    position: relative;
+    z-index: 10;
     text-align: center;
-    color: white; /* Default text color */
+    color: white;
 }
 
 .game-title {
-    font-size: 8em; /* Large, bold title */
+    font-size: 8em;
     margin-bottom: 50px;
     letter-spacing: 5px;
-    text-shadow: 
-        -4px -4px 0 #330066,  /* Dark purple outline */
+    text-shadow:
+        -4px -4px 0 #330066,
         4px -4px 0 #330066,
         -4px 4px 0 #330066,
         4px 4px 0 #330066,
-        0 0 10px rgba(255, 255, 255, 0.5); /* Subtle glow */
-    color: white; /* Main color of the title */
-    background-image: url('assets/octo_fiesta_title_texture.png'); /* Optional: a pixelated texture for the title */
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+        0 0 10px rgba(255, 255, 255, 0.5);
+    color: white;
+    /* background-image: url('assets/octo_fiesta_title_texture.png'); Optional: a pixelated texture for the title */
+    /* background-clip: text; */
+    /* -webkit-background-clip: text; */
+    /* color: transparent; */
 }
 
 .menu {
     list-style: none;
     padding: 0;
-    margin-top: 50px; /* Space from title */
+    margin-top: 50px;
 }
 
 .menu-item {
-    display: block; /* Each item on its own line */
+    display: block;
     font-size: 2.5em;
-    color: #eee; /* Light gray for menu items */
+    color: #eee;
     text-decoration: none;
     margin-bottom: 15px;
-    text-shadow: 2px 2px 0 #000; /* Subtle outline */
+    text-shadow: 2px 2px 0 #000;
     transition: color 0.1s ease-in-out, text-shadow 0.1s ease-in-out;
 }
 
 .menu-item:hover {
-    color: #99FFFF; /* Cyan glow on hover */
+    color: #99FFFF;
     text-shadow: 0 0 15px #99FFFF, 2px 2px 0 #000;
     cursor: pointer;
 }
@@ -155,7 +150,7 @@ img {
     font-size: 1.2em;
     color: #aaa;
     margin-top: 40px;
-    animation: flicker 1.5s infinite alternate; /* Add a flicker effect */
+    animation: flicker 1.5s infinite alternate;
 }
 
 .version-info {
@@ -181,13 +176,3 @@ img {
     0%, 100% { opacity: 0.8; }
     50% { opacity: 0.6; }
 }
-
-/* Optional: Scroll the background for a subtle parallax feel */
-/* @keyframes backgroundScroll {
-    from { background-position: 0 0; }
-    to { background-position: 100% 0; }
-}
-.background-stars {
-    animation: backgroundScroll 60s linear infinite;
-}
-*/
