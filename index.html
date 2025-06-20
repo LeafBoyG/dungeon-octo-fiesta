@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <div id="game-container">
@@ -24,21 +23,26 @@
             <img src="assets/ground_silhouette.png" alt="Ground Silhouette" class="ground-silhouette">
         </div>
 
-        <div id="title-screen">
+        <div id="initial-splash-screen" class="screen active">
             <h1 class="game-title">OCTO FIESTA</h1>
-            <div class="menu">
-                <a href="#" id="playGame" class="menu-item">PLAY</a>
-                <a href="#" id="options" class="menu-item">OPTIONS</a>
-                <p class="press-start-message">PRESS ANY KEY TO START</p>
-            </div>
+            <p class="press-start-message">PRESS ANY KEY TO START</p>
             <div class="version-info">2.0.8</div>
         </div>
+
+        <div id="main-menu-screen" class="screen">
+            <div class="menu-image-container">
+                <img src="assets/octo_fiesta_menu_octopus.jpg" alt="Octo Fiesta Menu Octopus" class="menu-octopus-img">
+            </div>
+            <div class="main-menu-buttons">
+                <a href="#" id="continueGame" class="menu-item">CONTINUE</a>
+                <a href="#" id="newGame" class="menu-item">NEW GAME</a>
+                <a href="#" id="settings" class="menu-item">SETTINGS</a>
+                <a href="#" id="exitGame" class="menu-item">EXIT</a>
+            </div>
+        </div>
+
     </div>
-<style>
-body {
-  background-image: url('octoLoad.png');
-}
-</style>
+
     <script src="startup.js"></script>
 </body>
 </html>
