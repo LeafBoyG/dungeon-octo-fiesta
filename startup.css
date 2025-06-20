@@ -1,31 +1,41 @@
-/* Basic Reset */
-body, html {
+/* Basic Reset & Global Styles */
+html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevent scrollbars for game feel */
-    font-family: 'Audiowide', sans-serif; /* Applied Audiowide here */
-    cursor: url('assets/pixel_cursor.png'), auto; /* Custom pixel cursor */
+    overflow: hidden; /* Crucial for full-screen game feel */
+    height: 100%; /* Ensure body takes full viewport height */
+    width: 100%; /* Ensure body takes full viewport width */
+    font-family: 'Audiowide', sans-serif; /* Your chosen font */
+    color: #f0f0f0; /* Default light text color */
+    /* Custom pixel cursor - ensure assets/pixel_cursor.png exists */
+    cursor: url('assets/pixel_cursor.png'), auto;
 }
 
-/* Ensure pixel art stays crisp when scaled */
-img {
+/* Ensure pixel art stays crisp when scaled - essential for the aesthetic */
+img, .background-stars, .background-structure, .background-skull-glow,
+.player-silhouette, .ground-silhouette {
     image-rendering: crisp-edges;
     image-rendering: pixelated; /* For modern browsers */
     -ms-interpolation-mode: nearest-neighbor; /* For IE */
 }
 
+/* Main Game Container - The viewport for your entire screen */
 #game-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
-    background-color: #1a0033; /* Dark base purple */
-    background-image: linear-gradient(to bottom, #1a0033, #330066); /* Subtle gradient */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100vw; /* Viewport Width */
+    height: 100vh; /* Viewport Height */
+    /* Deeper, more saturated purple gradient for the background */
+    background: linear-gradient(to bottom, #12002b 0%, #3a005c 100%);
+    display: flex; /* Use flexbox to easily center content */
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.5); /* Subtle inner shadow for depth */
 }
 
-/* Background Elements - positioned absolutely */
+/* Background Layers - positioned absolutely within #game-container */
+/* Order matters for z-index or visual layering */
+
+/* Stars - furthest back, subtle animation */
 .background-stars {
     position: absolute;
     top: 0;
@@ -33,146 +43,218 @@ img {
     width: 100%;
     height: 100%;
     background-image: url('assets/stars_bg.png'); /* Repeating small pixel stars */
-    background-size: auto;
-    animation: twinkle 10s infinite alternate; /* Subtle animation */
+    background-size: 150px 150px; /* Control size of repeating stars */
+    opacity: 0.6; /* Make them slightly transparent */
+    animation: twinkle 10s infinite alternate, starfieldScroll 120s linear infinite; /* Add a slow scroll */
+    z-index: 1; /* Lowest layer */
 }
 
+/* Dungeon Structure (Castle/Fortress) - large, atmospheric, and slightly faded */
 .background-structure {
     position: absolute;
-    bottom: 0;
-    right: 0; /* Position the castle/structure */
-    width: 50%; /* Adjust size as needed */
-    height: 80%; /* Adjust height */
+    bottom: -10%; /* Pull it slightly down to give more sky */
+    right: -5%; /* Position to the right, slightly off-screen for scale */
+    width: 70%; /* Adjust size as needed, making it quite large */
+    height: 90%; /* Adjust height */
     background-image: url('assets/dungeon_castle_bg.png'); /* Pixel art castle/structure */
     background-repeat: no-repeat;
     background-position: bottom right;
-    background-size: contain;
-    filter: brightness(0.8); /* Slightly dim it to be in background */
+    background-size: contain; /* Ensure it scales within its bounds */
+    filter: brightness(0.7) contrast(1.2); /* Darken slightly, add more contrast */
+    opacity: 0.9; /* Slight transparency */
+    z-index: 2; /* Below the glowing elements/foreground */
 }
 
+/* Glowing Skull/Element - should appear to be part of or in front of the structure */
 .background-skull-glow {
     position: absolute;
-    bottom: 15%; /* Adjust to align with your structure */
-    right: 18%;
-    width: 10%;
-    height: 15%;
-    background-image: url('assets/glowing_skull.png');
+    /* Adjust these values to precisely align with your background_structure.png */
+    bottom: 25%; /* Example: adjust based on where skull is on your asset */
+    right: 15%; /* Example: adjust based on where skull is on your asset */
+    width: 20%; /* Size of the glow element */
+    height: 30%; /* Height of the glow element */
+    background-image: url('assets/glowing_skull.png'); /* Make sure this is a glowing pixel art asset */
     background-size: contain;
     background-repeat: no-repeat;
-    animation: pulseGlow 2s infinite alternate;
+    background-position: center;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); /* Stronger cyan glow */
+    animation: pulseGlow 2s infinite alternate ease-in-out;
+    z-index: 3; /* Above the structure */
 }
 
-/* Foreground Silhouettes */
+
+/* Foreground Silhouettes - characters and immediate ground elements */
 #foreground-silhouette {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: auto; /* Height will be determined by content */
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    pointer-events: none;
+    align-items: flex-end; /* Align elements to the bottom */
+    justify-content: space-between; /* If you have elements on both sides */
+    pointer-events: none; /* Allows clicks to pass through to menu below */
+    z-index: 5; /* Above most background elements, below title/menu */
 }
 
 .player-silhouette {
-    width: 30%; /* Adjust size */
+    width: 35%; /* Make hero a bit larger/more prominent */
+    max-width: 400px; /* Cap its size */
     height: auto;
-    filter: brightness(0) invert(1);
+    /* This filter assumes your hero_silhouette.png is initially white or light. */
+    /* If it's already dark, you might just need background-image */
+    filter: brightness(0) invert(1); /* Turns white to black, then inverts to create a sharp silhouette */
     background-image: url('assets/hero_silhouette.png'); /* Your character's silhouette */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom left;
-    margin-left: 5%;
+    margin-left: 5%; /* Push it from the left edge */
+    transform: translateY(10px); /* Small lift for subtle animation base */
+    animation: subtleBob 5s infinite ease-in-out; /* Subtle breathing/idle animation */
 }
 
 .ground-silhouette {
-    width: 100%;
-    height: 150px; /* Adjust height for the ground line */
-    background-image: url('assets/jagged_ground_silhouette.png'); /* Jagged pixel ground */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    position: absolute;
+    position: absolute; /* Position relative to #foreground-silhouette */
     bottom: 0;
     left: 0;
-    background-color: #000;
+    width: 100%;
+    height: 180px; /* Slightly taller ground line */
+    background-image: url('assets/jagged_ground_silhouette.png'); /* Jagged pixel ground */
+    background-size: cover; /* Cover the entire width */
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-color: #000; /* Solid black base for the ground */
+    border-top: 5px solid #220044; /* Add a subtle ridge/edge */
 }
 
-/* Title Screen */
+
+/* Title Screen & Menu */
 #title-screen {
-    position: relative;
-    z-index: 10;
+    position: relative; /* Allows elements within to be positioned relative to this */
+    z-index: 10; /* Highest layer, ensures visibility */
     text-align: center;
-    color: white;
+    padding-bottom: 100px; /* Push content up from the bottom for space */
 }
 
 .game-title {
-    font-size: 8em;
+    font-size: 8em; /* Large, bold title */
     margin-bottom: 50px;
-    letter-spacing: 5px;
+    letter-spacing: 10px; /* Wider letter spacing for impact */
+    /* Enhanced text shadow for a more pronounced, glowing outline */
     text-shadow:
-        -4px -4px 0 #330066,
-        4px -4px 0 #330066,
-        -4px 4px 0 #330066,
-        4px 4px 0 #330066,
-        0 0 10px rgba(255, 255, 255, 0.5);
-    color: white;
-    /* background-image: url('assets/octo_fiesta_title_texture.png'); Optional: a pixelated texture for the title */
-    /* background-clip: text; */
-    /* -webkit-background-clip: text; */
-    /* color: transparent; */
+        -5px -5px 0 #330066,  /* Dark purple outline */
+        5px -5px 0 #330066,
+        -5px 5px 0 #330066,
+        5px 5px 0 #330066,
+        0 0 25px rgba(255, 255, 255, 0.7), /* Stronger white glow */
+        0 0 40px rgba(0, 255, 255, 0.5); /* Cyan secondary glow */
+    color: white; /* Main color of the title */
+    animation: titlePulse 3s infinite alternate ease-in-out; /* Subtle title pulse */
 }
 
 .menu {
     list-style: none;
     padding: 0;
-    margin-top: 50px;
+    margin-top: 50px; /* Space from title */
 }
 
 .menu-item {
-    display: block;
-    font-size: 2.5em;
-    color: #eee;
+    display: block; /* Each item on its own line */
+    font-size: 2.8em; /* Slightly larger menu items */
+    color: #eee; /* Light gray for menu items */
     text-decoration: none;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 0 #000;
-    transition: color 0.1s ease-in-out, text-shadow 0.1s ease-in-out;
+    margin-bottom: 20px; /* More spacing between items */
+    text-shadow: 3px 3px 0 #000, 0 0 10px rgba(255,255,255,0.3); /* Stronger shadow, subtle glow */
+    transition: color 0.1s ease-in-out, text-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
 }
 
 .menu-item:hover {
-    color: #99FFFF;
-    text-shadow: 0 0 15px #99FFFF, 2px 2px 0 #000;
+    color: #99FFFF; /* Cyan glow on hover */
+    text-shadow: 0 0 20px #99FFFF, 3px 3px 0 #000; /* Intense hover glow */
+    transform: translateX(10px); /* Slide slightly on hover */
     cursor: pointer;
 }
 
 .press-start-message {
-    font-size: 1.2em;
-    color: #aaa;
-    margin-top: 40px;
-    animation: flicker 1.5s infinite alternate;
+    font-size: 1.5em; /* Larger message */
+    color: #bbb; /* Slightly lighter color */
+    margin-top: 60px; /* More space */
+    animation: flicker 1.2s infinite alternate, neonPulse 0.8s infinite alternate; /* More dynamic flicker */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .version-info {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    font-size: 1em;
-    color: #888;
+    font-size: 0.9em;
+    color: #666; /* Subtler color */
+    text-shadow: 1px 1px 0 #000;
 }
 
 /* Keyframe Animations */
 @keyframes flicker {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.7; }
+    75% { opacity: 0.9; }
+}
+
+@keyframes neonPulse {
+    0%, 100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(0, 255, 255, 0.3); }
+    50% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6); }
 }
 
 @keyframes pulseGlow {
-    0%, 100% { filter: brightness(1) drop-shadow(0 0 10px #00FFFF); }
-    50% { filter: brightness(1.5) drop-shadow(0 0 20px #00FFFF); }
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); }
+    50% { filter: drop-shadow(0 0 25px rgba(0, 255, 255, 1)); }
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 0.6; }
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.3; }
+    75% { opacity: 0.7; }
 }
+
+@keyframes starfieldScroll {
+    from { background-position: 0 0; }
+    to { background-position: 100% 100%; } /* Scroll diagonally for a more dynamic feel */
+}
+
+@keyframes subtleBob {
+    0%, 100% { transform: translateY(10px); }
+    50% { transform: translateY(0px); }
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.01); /* Very subtle scale */
+          text-shadow:
+              -5px -5px 0 #330066,
+              5px -5px 0 #330066,
+              -5px 5px 0 #330066,
+              5px 5px 0 #330066,
+              0 0 30px rgba(255, 255, 255, 0.8), /* Stronger white glow */
+              0 0 50px rgba(0, 255, 255, 0.6); /* Stronger cyan glow */
+    }
+}
+
+/* Optional: Scanline/CRT Effect (add this to #game-container) */
+/*
+#game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2) 0px,
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 100;
+}
+*/
