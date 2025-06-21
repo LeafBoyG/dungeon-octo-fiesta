@@ -13,7 +13,7 @@ html, body {
 
 /* Ensure pixel art stays crisp when scaled - essential for the aesthetic */
 img, .background-stars, .background-structure, .background-skull-glow,
-.player-silhouette, .ground-silhouette, .menu-octopus-img { /* Added .menu-octopus-img */
+.player-silhouette, .ground-silhouette {
     image-rendering: crisp-edges;
     image-rendering: pixelated; /* For modern browsers */
     -ms-interpolation-mode: nearest-neighbor; /* For IE */
@@ -67,7 +67,7 @@ img, .background-stars, .background-structure, .background-skull-glow,
 
 /* Initial Splash Screen Specifics */
 #initial-splash-screen {
-    /* Styles specific to your title screen */
+    /* Styles specific to your title screen (no changes needed from previous version) */
 }
 
 .game-title {
@@ -94,53 +94,48 @@ img, .background-stars, .background-structure, .background-skull-glow,
 }
 
 .version-info {
-    position: absolute; /* Position relative to initial-splash-screen */
+    position: absolute;
     bottom: 20px;
-    right: 20px; /* Aligned to the bottom right of the screen */
+    right: 20px;
     font-size: 0.9em;
     color: #666;
     text-shadow: 1px 1px 0 #000;
-    /* Ensure this is on the initial splash screen only if you want it there */
 }
 
 
-/* Main Menu Screen Specifics */
+/* Main Menu Screen Specifics - BACKGROUND IS NOW THE IMAGE */
 #main-menu-screen {
-    /* Override flex-direction for main menu layout if needed, or adjust children */
-    flex-direction: row; /* Layout image and buttons side-by-side */
-    justify-content: space-evenly; /* Even spacing */
-    align-items: center; /* Vertically center image and buttons */
+    background-image: url('assets/octo_fiesta_menu_octopus.jpg'); /* The octopus image as background */
+    background-size: cover; /* Cover the entire screen */
+    background-position: center; /* Center the image */
+    /* Adjust flex-direction if you want buttons laid out differently */
+    flex-direction: column; /* Stack buttons vertically */
+    justify-content: center; /* Center buttons vertically */
+    align-items: center; /* Center buttons horizontally */
+    /* Add a subtle overlay for text readability on top of the background image */
+    background-blend-mode: multiply; /* Blends with existing background color */
+    background-color: rgba(0, 0, 0, 0.2); /* Dark overlay for better text contrast */
 }
 
-.menu-image-container {
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.3); /* Semi-transparent background for the image */
-    border: 2px solid #5a0090; /* Border to frame the image */
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Glow around the image */
-    border-radius: 5px; /* Slightly rounded corners */
-}
-
-.menu-octopus-img {
-    max-width: 400px; /* Adjust size as needed */
-    height: auto;
-    display: block; /* Remove extra space below image */
-}
+/* No more .menu-image-container or .menu-octopus-img as the image is the background */
 
 .main-menu-buttons {
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 20px; /* Space between buttons */
-    margin-left: 50px; /* Space between image and buttons */
+    flex-direction: column;
+    gap: 20px;
+    /* Adjust margin to fine-tune button position relative to the background image */
+    margin-top: 20%; /* Example: Push buttons down from the top if octopus is at bottom */
+    margin-bottom: 20%; /* Example: Adjust this based on your octopus image composition */
 }
 
-.main-menu-buttons .menu-item { /* Target new menu items */
+.main-menu-buttons .menu-item {
     display: block;
     font-size: 2.8em;
     color: #eee;
     text-decoration: none;
-    padding: 10px 30px; /* Padding for button-like appearance */
-    background: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
-    border: 2px solid #660099; /* Dark border */
+    padding: 10px 30px;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    border: 2px solid #660099;
     border-radius: 5px;
     text-shadow: 3px 3px 0 #000, 0 0 10px rgba(255,255,255,0.3);
     transition: all 0.2s ease-in-out;
@@ -148,13 +143,12 @@ img, .background-stars, .background-structure, .background-skull-glow,
 
 .main-menu-buttons .menu-item:hover {
     color: #99FFFF;
-    background: rgba(0, 50, 100, 0.6); /* Slightly more vibrant hover background */
-    border-color: #99FFFF; /* Border color changes on hover */
+    background: rgba(0, 50, 100, 0.7); /* More vibrant hover background */
+    border-color: #99FFFF;
     text-shadow: 0 0 25px #99FFFF, 3px 3px 0 #000;
-    transform: scale(1.05); /* Slight enlarge on hover */
+    transform: scale(1.05);
     cursor: pointer;
 }
-
 
 /* Keyframe Animations */
 @keyframes flicker {
