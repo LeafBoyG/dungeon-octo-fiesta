@@ -106,14 +106,14 @@ menu-octopus-img {
 }
 
 
-/* Main Menu Screen Specifics - BACKGROUND IS NOW THE IMAGE */
+/* TRYING TO MAKE THE STUPID IMAGE WORK */
 #main-menu-screen {
     height: 100vh;
     width: 100vw;
     background-image: url('assets/octo_fiesta_menu_octopus.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center; /* Ensures the octopus fills the full area */
+    background-position: center center; /* THIS SHOULD WORK */
     background-blend-mode: multiply;
     background-color: rgba(0, 0, 0, 0.2);
     display: flex;
@@ -123,7 +123,7 @@ menu-octopus-img {
 }
 
 
-/* No more .menu-image-container or .menu-octopus-img as the image is the background */
+/* YOU'RE PUSHING MY BUTTONS */
 
 .main-menu-buttons {
     display: flex;
@@ -131,7 +131,7 @@ menu-octopus-img {
     gap: 20px;
     /* Adjust margin to fine-tune button position relative to the background image */
     margin-top: 20%; /* Example: Push buttons down from the top if octopus is at bottom */
-    margin-bottom: 20%; /* Example: Adjust this based on your octopus image composition */
+    margin-bottom: 20%; /* IMAGE COMPOSITION STUFF */
 }
 
 .main-menu-buttons .menu-item {
@@ -149,7 +149,7 @@ menu-octopus-img {
 
 .main-menu-buttons .menu-item:hover {
     color: #99FFFF;
-    background: rgba(0, 50, 100, 0.7); /* More vibrant hover background */
+    background: rgba(0, 50, 100, 0.7); /* COOL HOVER STUFF */
     border-color: #99FFFF;
     text-shadow: 0 0 25px #99FFFF, 3px 3px 0 #000;
     transform: scale(1.05);
