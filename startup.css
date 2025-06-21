@@ -1,76 +1,70 @@
-/* Basic Reset & Global Styles */
+/* GLOBAL RESET AND BASE STYLES */
 html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Crucial for full-screen game feel */
-    height: 100%; /* Ensure body takes full viewport height */
-    width: 100%; /* Ensure body takes full viewport width */
-    font-family: 'Audiowide', sans-serif; /* Your chosen font */
-    color: #f0f0f0; /* Default light text color */
-    /* Custom pixel cursor - ensure assets/pixel_cursor.png exists */
-    cursor: url('assets/pixel_cursor.png'), auto;
+    overflow: hidden; /* CRUCIAL FOR FULL-SCREEN GAME FEEL */
+    height: 100%; /* ENSURE BODY TAKES FULL VIEWPORT HEIGHT */
+    width: 100%; /* ENSURE BODY TAKES FULL VIEWPORT WIDTH */
+    font-family: 'Audiowide', sans-serif; /* YOUR CHOSEN FONT */
+    color: #f0f0f0; /* DEFAULT LIGHT TEXT COLOR */
+    cursor: url('assets/pixel_cursor.png'), auto; /* CUSTOM PIXEL CURSOR - ENSURE ASSET EXISTS */
 }
 
-/* Ensure pixel art stays crisp when scaled - essential for the aesthetic */
+/* PIXEL ART RENDERING */
 img, .background-stars, .background-structure, .background-skull-glow,
 .player-silhouette, .ground-silhouette {
     image-rendering: crisp-edges;
-    image-rendering: pixelated; /* For modern browsers */
-    -ms-interpolation-mode: nearest-neighbor; /* For IE */
-}
-menu-octopus-img {
-    height: 100vh;
-    width: 100vh;
-}
-/* Main Game Container - The viewport for your entire screen */
-#game-container {
-    position: relative;
-    width: 100vw; /* Viewport Width */
-    height: 100vh; /* Viewport Height */
-    /* Deeper, more saturated purple gradient for the background */
-    background: linear-gradient(to bottom, #12002b 0%, #3a005c 100%);
-    display: flex; /* Use flexbox to easily center content */
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.5); /* Subtle inner shadow for depth */
+    image-rendering: pixelated; /* FOR MODERN BROWSERS */
+    -ms-interpolation-mode: nearest-neighbor; /* FOR IE */
 }
 
-/* Screen Management */
+/* MAIN GAME CONTAINER */
+#game-container {
+    position: relative;
+    width: 100vw; /* VIEWPORT WIDTH */
+    height: 100vh; /* VIEWPORT HEIGHT */
+    background: linear-gradient(to bottom, #12002b 0%, #3a005c 100%); /* DEEPER, MORE SATURATED PURPLE GRADIENT */
+    display: flex; /* USE FLEXBOX TO EASILY CENTER CONTENT */
+    justify-content: center; /* HORIZONTALLY CENTER */
+    align-items: center; /* VERTICALLY CENTER */
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.5); /* SUBTLE INNER SHADOW FOR DEPTH */
+}
+
+/* SCREEN TRANSITION MANAGEMENT */
 .screen {
-    position: absolute; /* Allows elements to overlap precisely */
+    position: absolute; /* ALLOWS ELEMENTS TO OVERLAP PRECISELY */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex; /* Centers content within each screen */
-    flex-direction: column; /* Stack children vertically */
+    display: flex; /* CENTERS CONTENT WITHIN EACH SCREEN */
+    flex-direction: column; /* STACK CHILDREN VERTICALLY */
     justify-content: center;
     align-items: center;
-    opacity: 0; /* Hidden by default */
-    visibility: hidden; /* Also hidden by default */
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Smooth transition */
-    text-align: center; /* Center text within screens */
-    z-index: 9; /* Below active screen */
+    opacity: 0; /* HIDDEN BY DEFAULT */
+    visibility: hidden; /* ALSO HIDDEN BY DEFAULT */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* SMOOTH TRANSITION */
+    text-align: center; /* CENTER TEXT WITHIN SCREENS */
+    z-index: 9; /* BELOW ACTIVE SCREEN */
 }
 
 .screen.active {
     opacity: 1;
     visibility: visible;
-    z-index: 10; /* Bring active screen to front */
+    z-index: 10; /* BRING ACTIVE SCREEN TO FRONT */
 }
 
-
-/* Background Layers (mostly same, ensure z-index is lower than screens) */
+/* BACKGROUND LAYERS */
 .background-stars { z-index: 1; }
 .background-structure { z-index: 2; }
 .background-skull-glow { z-index: 3; }
 #foreground-silhouette { z-index: 5; }
-.player-silhouette { /* ... existing styles ... */ animation: subtleBob 5s infinite ease-in-out; }
-.ground-silhouette { /* ... existing styles ... */ }
+.player-silhouette { animation: subtleBob 5s infinite ease-in-out; }
+.ground-silhouette { /* EXISTING STYLES */ }
 
-/* Initial Splash Screen Specifics */
+/* INITIAL SPLASH SCREEN STYLES */
 #initial-splash-screen {
-    /* Styles specific to your title screen (no changes needed from previous version) */
+    /* NO ADDITIONAL STYLES NEEDED HERE BEYOND .SCREEN */
 }
 
 .game-title {
@@ -105,58 +99,54 @@ menu-octopus-img {
     text-shadow: 1px 1px 0 #000;
 }
 
-
-/* TRYING TO MAKE THE STUPID IMAGE WORK */
+/* MAIN MENU SCREEN WITH OCTOPUS BACKGROUND */
 #main-menu-screen {
-    height: 100vh;
-    width: 100vw;
-    background-image: url('assets/octo_fiesta_menu_octopus.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center; /* THIS SHOULD WORK */
-    background-blend-mode: multiply;
-    background-color: rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-image: url('assets/octo_fiesta_menu_octopus.jpg'); /* THE OCTOPUS IMAGE AS BACKGROUND */
+    background-size: contain; /* SCALES TO SHOW ENTIRE IMAGE, MIGHT LEAVE BARS */
+    background-repeat: no-repeat; /* ENSURE IT DOESN'T TILE */
+    background-position: center center; /* IMAGE POSITIONING */
+    background-blend-mode: multiply; /* BLENDS WITH EXISTING BACKGROUND COLOR */
+    background-color: rgba(0, 0, 0, 0.2); /* DARK OVERLAY FOR BETTER TEXT CONTRAST */
+    display: flex; /* FLEXBOX FOR BUTTON LAYOUT */
+    flex-direction: column; /* STACK BUTTONS VERTICALLY */
+    justify-content: center; /* CENTER BUTTONS VERTICALLY */
+    align-items: center; /* CENTER BUTTONS HORIZONTALLY */
 }
 
-
-/* YOU'RE PUSHING MY BUTTONS */
-
+/* MAIN MENU BUTTONS CONTAINER */
 .main-menu-buttons {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* Adjust margin to fine-tune button position relative to the background image */
-    margin-top: 20%; /* Example: Push buttons down from the top if octopus is at bottom */
-    margin-bottom: 20%; /* IMAGE COMPOSITION STUFF */
+    margin-top: 20%; /* PUSH BUTTONS DOWN FROM THE TOP (ADJUST AS NEEDED FOR IMAGE) */
+    margin-bottom: 20%; /* ADJUST BASED ON IMAGE COMPOSITION */
 }
 
+/* INDIVIDUAL MENU BUTTON STYLES */
 .main-menu-buttons .menu-item {
     display: block;
     font-size: 2.8em;
     color: #eee;
     text-decoration: none;
     padding: 10px 30px;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    background: rgba(0, 0, 0, 0.5); /* SEMI-TRANSPARENT BACKGROUND FOR READABILITY */
     border: 2px solid #660099;
     border-radius: 5px;
     text-shadow: 3px 3px 0 #000, 0 0 10px rgba(255,255,255,0.3);
     transition: all 0.2s ease-in-out;
 }
 
+/* MENU BUTTON HOVER EFFECTS */
 .main-menu-buttons .menu-item:hover {
     color: #99FFFF;
-    background: rgba(0, 50, 100, 0.7); /* COOL HOVER STUFF */
+    background: rgba(0, 50, 100, 0.7); /* MORE VIBRANT HOVER BACKGROUND */
     border-color: #99FFFF;
     text-shadow: 0 0 25px #99FFFF, 3px 3px 0 #000;
-    transform: scale(1.05);
+    transform: scale(1.05); /* SLIGHT ENLARGE ON HOVER */
     cursor: pointer;
 }
 
-/* Keyframe Animations */
+/* KEYFRAME ANIMATIONS */
 @keyframes flicker {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.7; }
@@ -201,3 +191,24 @@ menu-octopus-img {
               0 0 50px rgba(0, 255, 255, 0.6);
     }
 }
+
+/* OPTIONAL: SCANLINE/CRT EFFECT (ADD THIS TO #GAME-CONTAINER) */
+/*
+#game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2) 0px,
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 100;
+}
+*/
