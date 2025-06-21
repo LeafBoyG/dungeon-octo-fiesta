@@ -18,7 +18,10 @@ img, .background-stars, .background-structure, .background-skull-glow,
     image-rendering: pixelated; /* For modern browsers */
     -ms-interpolation-mode: nearest-neighbor; /* For IE */
 }
-
+menu-octopus-img {
+    height: 100vh;
+    width: 100vh;
+}
 /* Main Game Container - The viewport for your entire screen */
 #game-container {
     position: relative;
